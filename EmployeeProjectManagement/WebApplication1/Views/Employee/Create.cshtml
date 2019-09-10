@@ -1,0 +1,92 @@
+﻿@model WebApplication1.Models.Employee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="text-center text-info">Employee Record</h4>
+<hr />
+@* Create view used for create and edit the employee record *@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Employee" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmployeeID" />
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" maxlength="20"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" maxlength="20" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" maxlength="100" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Contact" class="control-label"></label>
+                <input asp-for="Contact" class="form-control" maxlength="10" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label">Gender of Employee</label><br>
+                <input asp-for="Gender" type="radio" value="Male" /> Male <br>
+                <input asp-for="Gender" type="radio" value="Female" />Female <br>
+                <span asp-validation-for="Gender" class="text-danger"></span><br>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DateofBirth" class="control-label"></label>
+                <input asp-for="DateofBirth" class="form-control" />
+                <span asp-validation-for="DateofBirth" class="text-danger"></span><br>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" class="form-control" asp-items="Html.GetEnumSelectList<Department>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span><br>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.ProjectID" class="control-label"></label>
+                <select asp-for="@Model.ProjectID" class="form-control" asp-items="ViewBag.Projects"></select>
+                <span asp-validation-for="@Model.ProjectID" class="text-danger"></span><br>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="">Select Employee Status</option>
+                    <option value="Fresher">Fresher</option>
+                    <option value="Experience">Experience</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

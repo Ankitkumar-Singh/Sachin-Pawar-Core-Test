@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication1.Models.Project>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="text-center">
+    <img src="~/image/LIST.png" class="home-img" />
+</div>
+<h2 class="text-center text-info">List of Projects</h2>
+@* Index view listing all the projects list *@
+<p>
+    <a asp-action="Create" class="btn btn-outline-info">Add New Project</a>
+</p>
+<table class="table table-bordered text-center">
+    <thead>
+        <tr class="bg-dark text-white text-center">
+
+            <th display-for="ProjectID">Project ID</th>
+            <th display-for="Name">Project Name</th>
+            <th display-for="Description">Project Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>@Html.DisplayFor(modelItem => item.ProjectID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>
+                    <a asp-controller="Project" asp-action="Create" asp-route-id="@item.ProjectID" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ProjectID" class="btn btn-info">Details</a>
+                    <a asp-action="DeleteProject" asp-route-id="@item.ProjectID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

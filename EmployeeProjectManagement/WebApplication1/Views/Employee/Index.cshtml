@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebApplication1.Models.Employee>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <img src="~/image/employee.png" class="home-img" />
+</div>
+<h2 class="text-center text-info">List of Employees</h2>
+@* Index view listing all the employee list *@
+<p>
+    <a asp-action="Create" class="btn btn-outline-info">Add New Employee</a>
+</p>
+<table class="table table-bordered text-center">
+    @if (Model.Count() == 0)
+    {
+        <tr class="text-center text-danger">
+            <td colspan="7" class="table-danger"> Please add Employee.</td>
+        </tr>
+    }
+    else
+    {
+        <thead>
+            <tr class="bg-dark text-white text-center">
+                <th display-for="FirstName">First Name</th>
+                <th display-for="LastName">Last Name</th>
+                <th display-for="Email">Email-ID</th>
+                <th display-for="Gender">Gender</th>
+                <th display-for="Department">Department</th>
+                <th display-for="Project">Project</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Department)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Project.Name)</td>
+                    <td>
+                        <a asp-controller="Employee" asp-action="Create" asp-route-id="@item.EmployeeID" class="btn btn-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.EmployeeID" class="btn btn-info">Details</a>
+                        <a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeID" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    }
+</table>
